@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema RRHH — Tensar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <span class="logo-mark">T</span>
+    <span class="logo-text">RRHH</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="#" class="nav-item active" data-module="quincena">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Quincena
+    </a>
+    <a href="#" class="nav-item disabled" data-module="novedades">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Novedades
+      <span class="badge-pronto">Pronto</span>
+    </a>
+    <a href="#" class="nav-item disabled" data-module="prestamos">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Préstamos
+      <span class="badge-pronto">Pronto</span>
+    </a>
+    <a href="#" class="nav-item disabled" data-module="epp">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      EPP
+      <span class="badge-pronto">Pronto</span>
+    </a>
+    <a href="#" class="nav-item disabled" data-module="vacaciones">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Vacaciones
+      <span class="badge-pronto">Pronto</span>
+    </a>
+    <a href="#" class="nav-item disabled" data-module="legajos">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Legajos
+      <span class="badge-pronto">Pronto</span>
+    </a>
+  </nav>
+</aside>
+
+<main class="main-content">
+
+  <!-- ═══ MÓDULO QUINCENA ═══ -->
+  <div id="module-quincena" class="module active">
+
+    <!-- PASO 1: Configuración -->
+    <div id="paso-config" class="panel">
+      <div class="panel-header">
+        <h1 class="panel-title">Procesamiento de Quincena</h1>
+        <p class="panel-subtitle">Cargá los archivos y configurá el período a liquidar</p>
+      </div>
+
+      <div class="config-grid">
+        <div class="config-col">
+          <h3 class="section-label">Período</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Sector</label>
+              <select id="sector">
+                <option value="Premoldeado">Premoldeado</option>
+                <option value="Corte y Doblado">Corte y Doblado</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Año</label>
+              <select id="anio"></select>
+            </div>
+            <div class="form-group">
+              <label>Mes</label>
+              <select id="mes">
+                <option value="1">Enero</option><option value="2">Febrero</option>
+                <option value="3">Marzo</option><option value="4">Abril</option>
+                <option value="5">Mayo</option><option value="6">Junio</option>
+                <option value="7">Julio</option><option value="8">Agosto</option>
+                <option value="9">Septiembre</option><option value="10">Octubre</option>
+                <option value="11">Noviembre</option><option value="12">Diciembre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Quincena</label>
+              <select id="quincena">
+                <option value="1">1ª Quincena (1–15)</option>
+                <option value="2">2ª Quincena (16–fin)</option>
+              </select>
+            </div>
+          </div>
+
+          <h3 class="section-label" style="margin-top:24px">Horas en negro</h3>
+          <div class="form-group">
+            <label>Legajos separados por coma</label>
+            <input type="text" id="lista-negro" placeholder="Ej: 7, 69, 106">
+            <span class="form-hint">Las horas extras de estos empleados no se declaran al estudio</span>
+          </div>
+        </div>
+
+        <div class="config-col">
+          <h3 class="section-label">Archivos</h3>
+          <div class="upload-area" id="drop-reloj" onclick="document.getElementById('file-reloj').click()">
+            <div class="upload-icon">📋</div>
+            <div class="upload-label">Informe del reloj</div>
+            <div class="upload-hint">Excel exportado del sistema de fichaje</div>
+            <input type="file" id="file-reloj" accept=".xlsx,.xls" style="display:none" onchange="onFileSelect(this,'reloj')">
+            <div class="upload-name" id="name-reloj"></div>
+          </div>
+
+          <div class="upload-area" id="drop-personal" onclick="document.getElementById('file-personal').click()" style="margin-top:12px">
+            <div class="upload-icon">👥</div>
+            <div class="upload-label">Lista de personal</div>
+            <div class="upload-hint">Excel con legajos y nombres del sector</div>
+            <input type="file" id="file-personal" accept=".xlsx,.xls" style="display:none" onchange="onFileSelect(this,'personal')">
+            <div class="upload-name" id="name-personal"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <button class="btn-primary" id="btn-procesar" onclick="procesarQuincena()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Procesar quincena
+        </button>
+      </div>
+    </div>
+
+    <!-- PASO 2: Tabla editable -->
+    <div id="paso-tabla" class="panel hidden">
+      <div class="tabla-header">
+        <div>
+          <h2 class="panel-title" id="tabla-titulo">—</h2>
+          <p class="panel-subtitle" id="tabla-subtitulo">—</p>
+        </div>
+        <div class="tabla-actions">
+          <button class="btn-secondary" onclick="volverConfig()">← Volver</button>
+          <button class="btn-primary" onclick="descargarExcel()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Descargar Excel
+          </button>
+        </div>
+      </div>
+
+      <div id="alertas-mapeo" class="alertas hidden"></div>
+
+      <div class="tabla-wrap">
+        <table id="tabla-quincena">
+          <thead id="tabla-thead"></thead>
+          <tbody id="tabla-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /module-quincena -->
+
+</main>
+
+<!-- Modal edición celda -->
+<div id="modal-overlay" class="modal-overlay hidden" onclick="cerrarModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h3 id="modal-titulo">Editar día</h3>
+      <button class="modal-close" onclick="cerrarModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-info" id="modal-info"></div>
+      <div class="modal-fields">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Entrada</label>
+            <input type="text" id="modal-entrada" placeholder="07:00">
+          </div>
+          <div class="form-group">
+            <label>Salida</label>
+            <input type="text" id="modal-salida" placeholder="16:30">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Hs Normales</label>
+            <input type="number" id="modal-normales" step="0.01" min="0">
+          </div>
+          <div class="form-group">
+            <label>Hs Extras 50%</label>
+            <input type="number" id="modal-ext50" step="0.01" min="0">
+          </div>
+          <div class="form-group">
+            <label>Hs Extras 100%</label>
+            <input type="number" id="modal-ext100" step="0.01" min="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Hs Enfermedad</label>
+            <input type="number" id="modal-enfermedad" step="0.01" min="0">
+          </div>
+          <div class="form-group">
+            <label>Hs Accidente</label>
+            <input type="number" id="modal-accidente" step="0.01" min="0">
+          </div>
+        </div>
+        <div class="form-group" style="margin-top:8px">
+          <label>Jornada especial</label>
+          <div class="toggle-row">
+            <label class="toggle">
+              <input type="checkbox" id="modal-jornada12">
+              <span class="toggle-slider"></span>
+            </label>
+            <span class="toggle-label">Jornada 12hs (sin descuento almuerzo)</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Observaciones</label>
+          <input type="text" id="modal-obs" placeholder="Ej: certificado médico, llegada tarde...">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn-danger" onclick="marcarAusente()">Marcar ausente</button>
+      <button class="btn-primary" onclick="guardarModal()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div id="loading" class="loading-overlay hidden">
+  <div class="loading-box">
+    <div class="spinner"></div>
+    <p>Procesando datos del reloj...</p>
+  </div>
+</div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
